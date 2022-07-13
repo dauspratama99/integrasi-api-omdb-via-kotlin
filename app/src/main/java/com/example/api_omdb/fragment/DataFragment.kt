@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.api_omdb.MovieAdapter
 import com.example.api_omdb.R
@@ -38,16 +40,31 @@ class DataFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bundle = arguments
+        val s = bundle?.getString("mCari")
+        val apikey = "ada3db4c"
+
+        binding.progressBar.visibility
+
         binding.rvData.setHasFixedSize(true)
         binding.rvData.layoutManager = LinearLayoutManager(context)
 
-        RClient.instances.getMovie().enqueue(object :Callback<SearchData>{
+        RClient.instances.getMovie(s, apikey).enqueue(object :Callback<SearchData>{
             override fun onResponse(call: Call<SearchData>, response: Response<SearchData>) {
-                val responseCode = response.code()
+                val cekResponse = response.body()?.res
 
-                response.body()?.let { list.addAll(it.data) }
-                val adapter = MovieAdapter(list)
-                binding.rvData.adapter = adapter
+                if(cekResponse == "True"){
+                    val responseCode = response.code()
+
+                    response.body()?.let { list.addAll(it.data) }
+                    val adapter = MovieAdapter(list, requireContext())
+                    binding.rvData.adapter = adapter
+                    binding.progressBar.isVisible = false
+                } else {
+                    Toast.makeText(context, "Data Tidak Ditemukan", Toast.LENGTH_LONG).show()
+                    binding.progressBar.isVisible = false
+                }
+
             }
 
             override fun onFailure(call: Call<SearchData>, t: Throwable) {

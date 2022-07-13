@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".DetailActivity"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/img_gambarposter"
+        android:scaleType="fitXY"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_judulmovie"
+        android:layout_marginStart="16dp"
+        tools:text="Judul"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_tahun"
+        android:layout_marginStart="16dp"
+        tools:text="Publish"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_tglrilis"
+        android:layout_marginStart="16dp"
+        tools:text="22/22/2022"
+        android:textSize="12sp"
+        android:textColor="@color/purple_200"
+        />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/rating"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_keterangan"
+        android:layout_marginStart="16dp"
+        tools:text="@tools:sample/lorem/random"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="clip_vertical"
+
+        />
+
+</LinearLayout>

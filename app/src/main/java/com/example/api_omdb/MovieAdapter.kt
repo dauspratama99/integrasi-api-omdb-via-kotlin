@@ -1,5 +1,7 @@
 package com.example.api_omdb
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +10,8 @@ import com.example.api_omdb.databinding.ListDatamovieBinding
 import com.example.api_omdb.modeldata.MovieData
 
 class MovieAdapter(
-    private val listMovie:ArrayList<MovieData>
+    private val listMovie:ArrayList<MovieData>,
+    private val context: Context
 ):RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(itemView:ListDatamovieBinding):RecyclerView.ViewHolder(itemView.root){
@@ -18,6 +21,13 @@ class MovieAdapter(
                Glide.with(itemView).load(movieData.gambar).into(imgPoster)
                 tvTittle.text = movieData.Title
                 tvYear.text = movieData.Year
+
+                cvIdmovie.setOnClickListener{
+                    var i = Intent(context, DetailActivity::class.java).apply {
+                        putExtra("imdbid", movieData.idmovie)
+                    }
+                    context.startActivity(i)
+                }
             }
         }
     }

@@ -12,7 +12,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        showFragment()
+
+        binding.btnCari.setOnClickListener{
+            showFragment()
+        }
     }
 
     private fun showFragment() {
@@ -20,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         val mFragmentTransaction = mFragmentManager.beginTransaction()
         val mFragment = DataFragment()
 
-        mFragmentTransaction.add(R.id.fl_data, mFragment).commit()
+        val textCari = binding.etCari.text
+        val mBundle = Bundle()
+        mBundle.putString("mCari", textCari.toString())
+        mFragment.arguments = mBundle
+
+        mFragmentTransaction.replace(R.id.fl_data, mFragment).commit()
     }
 }
